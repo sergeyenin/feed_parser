@@ -155,6 +155,7 @@ describe FeedParser do
                 :title => "Ruby 1.8.7 imported",
                 :published => DateTime.parse("Jan 16, 2009 15:29:52 GMT"),
                 :categories => ["APIdock", "Ruby"],
+                :categories_domain => {'Ruby'=>'language'},
                 :author => "Otto Hilska",
                 :description => "I just finished importing Ruby 1.8.7 to APIdock. It&#8217;s also the new default version, because usually it is better documented. However, there&#8217;re some incompatibilities between 1.8.6 and 1.8.7, so be sure to check the older documentation when something seems to be wrong.\n",
                 :content => "<p>I just finished importing Ruby 1.8.7 to APIdock. It&#8217;s also the new default version, because usually it is better documented. However, there&#8217;re some incompatibilities between 1.8.6 and 1.8.7, so be sure to check the older documentation when something seems to be wrong.</p>\n"
@@ -171,6 +172,7 @@ describe FeedParser do
                 :title => "Comment posted: Re: Howdy how?",
                 :published => DateTime.parse("Nov 9, 2011 20:35:18 GMT"),
                 :categories => [],
+                :categories_domain => {},
                 :author => "Ffuuuuuuu- Le.",
                 :description => "<div>trololooo</div><p>Company: awesome | Project: Awesome project</p>",
                 :content => ""
@@ -187,6 +189,7 @@ describe FeedParser do
               :title => "Testing in Scrum with a Waterfall Interaction",
               :published => DateTime.parse("May 23, 2012 11:07:03 GMT"),
               :categories => [],
+              :categories_domain => {},
               :author => "",
               :description => "Sometimes, when testing user stories in Scrum, there's a final Waterfall  interaction to deal with. The scenario I present here is based on this  situation: a Scrum process with an interaction of sequential phases at  the end of the process to (re)test the whole developed functionality.  These sequential phases are mandatory for our organization, which  follows a Waterfall process for the releases of the product. So, for the  moment at least, we have to deal with this  and my experience is that  we aren't alone.",
               :content => ""
@@ -254,6 +257,7 @@ describe FeedParser do
                 :title => "Breaking Change: JavaScript SDK to oauth:true on December 13th",
                 :published => DateTime.parse("Dec 12, 2011 17:00 GMT"),
                 :categories=>[],
+                :categories_domain=>{},
                 :author => "",
                 :description => "",
                 :content => '<div><p>As part of our continued efforts to migrate all apps to OAuth 2.0, we are opting in all apps using the new JavaScript SDK to OAuth 2.0 tomorrow at 11am Pacific Time. The deadline to support OAuth 2.0 was <a href="https://developers.facebook.com/docs/oauth2-https-migration/">October 1st, 2011</a>.</p>

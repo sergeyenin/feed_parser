@@ -2,7 +2,7 @@ require 'cgi'
 
 class FeedParser
   class FeedItem
-    attr_reader :type
+    attr_reader :type, :categories_domain
 
     def initialize(item)
       @guid = item.xpath(Dsl[@type][:item_guid]).text
@@ -11,6 +11,7 @@ class FeedParser
       @author = item.xpath(Dsl[@type][:item_author]).text
       @description = possible_html_content(item.xpath(Dsl[@type][:item_description]))
       @content = possible_html_content(item.xpath(Dsl[@type][:item_content]))
+      @categories_domain = {}
       self
     end
 
@@ -33,6 +34,7 @@ class FeedParser
         :title => self.title,
         :published => self.published,
         :categories => self.categories,
+        :categories_domain => self.categories_domain,
         :author => self.author,
         :description => self.description,
         :content => self.content
@@ -69,6 +71,9 @@ class FeedParser
       @type = :rss
       super
       @link = item.xpath(Dsl[@type][:item_link]).text.strip
+      item.xpath(Dsl[@type][:item_categories]).each  do |cat|
+        @categories_domain[cat.text] = cat.attribute('domain').text.strip if cat.attribute('domain') #.encode('UTF-8', {:invalid => :replace, :undef => :replace, :replace => '?'}) rescue ''
+      end
       @categories = item.xpath(Dsl[@type][:item_categories]).map{|cat| cat.text}
     end
   end
@@ -79,6 +84,9 @@ class FeedParser
       super
       @link = item.xpath(Dsl[@type][:item_link]).attribute("href").text.strip
       @updated = parse_datetime(item.xpath(Dsl[@type][:item_updated]).text)
+      item.xpath(Dsl[@type][:item_categories]).each  do |cat|
+        @categories_domain[cat.attribute("term").text] = cat.attribute('domain').text.strip if cat.attribute('domain') #.encode('UTF-8', {:invalid => :replace, :undef => :replace, :replace => '?'}) rescue ''
+      end
       @categories = item.xpath(Dsl[@type][:item_categories]).map{|cat| cat.attribute("term").text}
     end
 
